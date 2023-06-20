@@ -38,7 +38,7 @@ namespace AdoNetLib
             adapter.Fill(ds);
 
             //Вернём первый элемент коллекции таблиц DataSet:
-            return ds.Tables[1];
+            return ds.Tables[0];
         }
     }
 }
