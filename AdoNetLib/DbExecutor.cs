@@ -40,5 +40,51 @@ namespace AdoNetLib
             //Вернём первый элемент коллекции таблиц DataSet:
             return ds.Tables[0];
         }
+
+
+        /// <summary>
+        /// метод на выборку всех данных из таблицы. Для начала нам необходимо написать команду:
+        /// </summary>
+        public SqlDataReader SelectAllCommandReader(string tableName)
+        {
+            /*
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "select * from NetworkUser";
+            command.CommandType = CommandType.Text;
+            command.Connection = connector.GetConnection();
+            */
+
+            /*или так - сразу через установку значений полей класса*/
+
+            SqlCommand command = new SqlCommand()
+            {
+                CommandType = CommandType.Text,
+                CommandText = $"select * from {tableName}",
+                Connection = _connector.GetConnection()
+            };
+
+            //Для того чтобы выполнить command, нам нужно использовать метод ExecuteReader():
+            SqlDataReader reader = command.ExecuteReader(); //Предоставляет способ чтения потока строк
+                                                            //последовательного доступа из базы данных SQL Server.
+            if (reader.HasRows)
+            {
+                return reader;
+            }
+            return null;
+        }
+
+        //удаления строки с пользователем по его логину
+        public int DeleteByColumn(string table, string column, string value)
+        {
+            SqlCommand command = new SqlCommand() 
+            {
+                CommandType = CommandType.Text,
+                CommandText = $"delete from {table} where  column = '{value}'",
+                Connection = _connector.GetConnection()
+            };
+            return command.ExecuteNonQuery();
+        }
+
+
     }
 }
