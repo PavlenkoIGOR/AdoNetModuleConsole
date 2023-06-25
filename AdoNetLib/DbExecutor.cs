@@ -86,5 +86,30 @@ namespace AdoNetLib
         }
 
 
+        /// <summary>
+        /// метод, который добавляет запись в таблицу NetworkUser при помощи процедуры:
+        /// </summary>
+        public int ExecProcedureAdding(string name, string login)
+        {
+            SqlCommand command = new SqlCommand
+            {
+                CommandType = CommandType.StoredProcedure,
+                CommandText = "AddingUserProc",
+                Connection = _connector.GetConnection()
+            };
+            command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@Login", login));
+            return command.ExecuteNonQuery();
+        }
+        
+        public int UpdateByColumn(string table, string columntocheck, string valuecheck, string columntoupdate, string valueupdate)
+        {
+            SqlCommand command = new SqlCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = $"update {table} set '{columntoupdate}' = '{valueupdate}' where {columntocheck} = '{valuecheck}'";
+            command.Connection = _connector.GetConnection();
+            return command.ExecuteNonQuery();
+        }
+        
     }
 }

@@ -80,5 +80,16 @@ namespace AdoNetLib
         {
             return _executor.DeleteByColumn(_userTable.Name, _userTable.ImportantField, value);
         }
+
+        public void AddUser(string login, string name)
+        {
+            _executor.ExecProcedureAdding(name, login);
+        }
+
+        public int UpdateUserByLogin(string value, string newvalue)
+        {
+            return _executor.UpdateByColumn(_userTable.Name, _userTable.ImportantField, value, _userTable.Fields[2], newvalue);
+        }
+
     }
 }
