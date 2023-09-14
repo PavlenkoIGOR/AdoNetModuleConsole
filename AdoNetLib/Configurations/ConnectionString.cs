@@ -8,6 +8,6 @@ namespace AdoNetLib.Configurations
 {
     public static class ConnectionString
     {
-        public static string MsSqlConnection = @"Data Source=.\SQLEXPRESS;Database=myBD;Trusted_Connection=True;Encrypt=false";
+        public static string MsSqlConnection => @"Data Source=.\sqlexpress;Database=myDB;Trusted_Connection=True;Encrypt=false";
     }
 }
