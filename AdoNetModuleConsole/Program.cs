@@ -20,6 +20,7 @@ namespace AdoNetModuleConsole
         static Manager manager = new Manager();
         static void Main(string[] args)
         {
+
             manager.Connect();
             manager.ShowData();
 
